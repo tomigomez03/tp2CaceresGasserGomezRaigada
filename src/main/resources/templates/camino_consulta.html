@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Consulta de Caminos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center">Consulta de Caminos</h1>
+
+        <!-- Mensaje de error -->
+        <div th:if="${errorMensaje}" class="alert alert-danger" role="alert" th:text="${errorMensaje}">
+        </div>
+
+        <!-- Formulario de consulta -->
+        <form th:action="@{/caminos/consulta}" method="post" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="codigoPostalOrigen" class="form-label">Código Postal de Ciudad de Origen:</label>
+                <input type="number" class="form-control" id="codigoPostalOrigen" name="codigoPostalOrigen"
+                       placeholder="Ingrese un código postal (4 dígitos)" max="9999" required>
+                <div class="invalid-feedback">
+                    Por favor ingrese un código postal válido (4 dígitos).
+                </div>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Consultar Caminos</button>
+                <a href="/caminos/agregar" class="btn btn-secondary">Agregar Caminos</a>
+                <a href="/index" class="btn btn-secondary">Volver al menú principal</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+</body>
+</html>
